@@ -1,40 +1,42 @@
 import java.util.*
 
-//Ex1: Complete the first code snippet listed on page 335 of our textbook
-//Ex2: Reimplement the second code snippet with Kotlin or Python
-//Ex3: Reimplement the third code snippet with either Kotlin or Python
-//Ex4: Review and correct the mistake in the fourth code snippet.
-
-object MainJava {
+object MainKotlin {
     @JvmStatic
     fun main(args: Array<String>) {
-        val fileInput = Scanner(System.`in`)
-        val s = args[0]
-        val dot = s.indexOf(".")
-        val base = s.substring(0, dot)
-        val extension = s.substring(dot + 1, s.length)
-        val query = args[0]
-        while (fileInput.hasNextLine()) {
-            val data = fileInput.nextLine()
-            if (data.contains(query)) println(data)
-        } //end while
-
-        fileInput.close()
-        println(base)
-        println(extension)
-        isPalindrome(s)
-        translate("ttgccatggatatcc")
+        val userInput = Scanner(System.`in`)
+        println("Please enter the number you want to check: ")
+        val target = userInput.nextInt()
+        twoSum(target)
     } //end main
 
-    fun isPalindrome(s: String): Boolean {
-        val n = s.length
-        for (i in 0 until n / 2) if (s[i] != s[n - 1 - i]) return false
-        return true
-    } //end method
+    fun twoSum(target: Int): Boolean {
+        val aList = IntArray(5)
+        val bList = IntArray(5)
+        val random = Random()
+        for (i in aList.indices) {
+            aList[i] = random.nextInt(10)
+        } //end for
 
-    fun translate(dna: String): String {
-        val dna = dna.uppercase(Locale.getDefault())
-        val rna = dna.replace("T".toRegex(), "U")
-        return rna
+        for (i in bList.indices) {
+            bList[i] = random.nextInt(10)
+        } //end for
+
+        Arrays.sort(aList)
+        Arrays.sort(bList)
+        println(aList.contentToString())
+        println(bList.contentToString())
+        var flag = false
+        for (i in aList.indices) {
+            for (j in aList.indices) {
+                flag = if (aList[i] + bList[j] == target) {
+                    true
+                } else {
+                    false
+                } //end if
+            } //end for
+        } //end for
+
+        println(flag)
+        return flag
     } //end method
 } //end class
